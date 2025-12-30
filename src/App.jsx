@@ -1,17 +1,18 @@
 import NavBar from './components/NavBar';
 import HeroSection from './components/HeroSection';
+import StyleGuide from './components/StyleGuide'; // 1. import เข้ามา
 
 export default function App() {
   return (
-    // จัดหน้าจอหลัก: ใช้ min-h-screen และสีพื้นหลังจาก theme
-    <div className="min-h-screen bg-brown-100 font-sans">
+    <div className="min-h-screen bg-brown-100 font-sans pb-20"> {/* เพิ่ม pb-20 ให้มีพื้นที่ด้านล่างหน่อย */}
       
-      {/* Todo 1: Render NavBar */}
       <NavBar />
       
-      {/* Todo 2: Render HeroSection */}
-      <main>
+      <main className="space-y-12"> {/* เพิ่มระยะห่างระหว่าง Section */}
         <HeroSection />
+        
+        {/* 2. แสดงผล StyleGuide */}
+        <StyleGuide />
       </main>
 
     </div>
