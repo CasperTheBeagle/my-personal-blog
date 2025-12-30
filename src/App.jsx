@@ -1,12 +1,19 @@
-// src/App.jsx
-import './App.css' // หรือถ้าไม่ได้ใช้ไฟล์นี้จะลบออกก็ได้ครับ
+import NavBar from './components/NavBar';
+import HeroSection from './components/HeroSection';
 
-function App() {
+export default function App() {
   return (
-    <section>
-      <h1>My First React App on Vite</h1>
-    </section>
+    // จัดหน้าจอหลัก: ใช้ min-h-screen และสีพื้นหลังจาก theme
+    <div className="min-h-screen bg-brown-100 font-sans">
+      
+      {/* Todo 1: Render NavBar */}
+      <NavBar />
+      
+      {/* Todo 2: Render HeroSection */}
+      <main>
+        <HeroSection />
+      </main>
+
+    </div>
   )
 }
-
-export default App

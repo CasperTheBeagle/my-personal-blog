@@ -1,1 +1,34 @@
 @import "tailwindcss";
+
+@theme {
+  /* --- Base Colors --- */
+  /* สีน้ำตาลเข้มสุด (Text Headings) */
+  --color-brown-600: #26231E; 
+  /* สีน้ำตาลรอง (Text Body) */
+  --color-brown-500: #43403B;
+  /* สีน้ำตาลเทา (Text Secondary) */
+  --color-brown-400: #75716B;
+  /* สีน้ำตาลอ่อน (Borders/Dividers) */
+  --color-brown-300: #DAD6D1;
+  /* สีพื้นหลังเข้ม (Secondary Background) */
+  --color-brown-200: #EFEEEB;
+  /* สีพื้นหลังหลัก (Main Background) */
+  --color-brown-100: #F9F8F6; 
+
+  /* --- Brand Colors --- */
+  /* สีส้ม (Highlights/Buttons) */
+  --color-orange-theme: #F2B68C;
+  /* สีเขียวเข้ม (Success/Active) */
+  --color-green-theme: #12B279;
+  /* สีเขียวอ่อน (Background Accents) */
+  --color-green-light: #D7F2E9;
+  /* สีแดง (Error/Alert) */
+  --color-red-theme: #EB5164;
+}
+
+/* ตั้งค่า Default ให้ตรงกับ Design */
+body {
+  font-family: "Inter", sans-serif; /* แนะนำให้ใช้ Font Inter หรือตาม Design ถ้ามี */
+  background-color: var(--color-brown-100); /* พื้นหลังเว็บเป็นสี #F9F8F6 */
+  color: var(--color-brown-600); /* ตัวหนังสือหลักเป็นสี #26231E */
+}
