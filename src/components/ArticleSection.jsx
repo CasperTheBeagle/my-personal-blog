@@ -7,12 +7,22 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useState } from 'react';
 import BlogCard from './BlogCard';
 import { blogPosts } from '../data/blogPosts';
 
 const categories = ["Highlight", "Cat", "Inspiration", "General"];
 
 const ArticleSection = () => {
+  const [selectedCategory, setSelectedCategory] = useState('Highlight');
+
+  const filteredArticles = selectedCategory === 'Highlight'
+    ? blogPosts
+    : blogPosts.filter(article => article.category === selectedCategory);
+
+  const handleCategoryChange = (category) => {
+    setSelectedCategory(category);
+  };
   return (
     <div className="max-w-[1440px] mx-auto px-6 md:px-16 mt-20 mb-20">
       <h2 className="text-2xl font-bold font-serif text-brown-600 mb-6">Latest articles</h2>
@@ -25,10 +35,13 @@ const ArticleSection = () => {
           {categories.map((category, index) => (
             <button
               key={index}
-              className={`font-medium px-6 py-2 rounded-md transition-colors ${category === 'Highlight'
-                  ? 'bg-brown-300 text-brown-600'
-                  : 'text-brown-400 hover:text-brown-600'
-                }`}
+              onClick={() => handleCategoryChange(category)}
+              disabled={category === selectedCategory}
+              className={`font-medium px-6 py-2 rounded-md transition-colors ${
+                category === selectedCategory
+                  ? 'bg-brown-400 text-brown-100 cursor-not-allowed'
+                  : 'text-brown-400 hover:bg-brown-100 hover:text-brown-600'
+              }`}
             >
               {category}
             </button>
@@ -38,7 +51,7 @@ const ArticleSection = () => {
         {/* Mobile: Dynamic Select from Array */}
         <div className="block md:hidden w-full">
           <label className="text-brown-400 mb-2 block font-medium">Category</label>
-          <Select defaultValue="Highlight">
+          <Select value={selectedCategory} onValueChange={handleCategoryChange}>
             <SelectTrigger className="w-full bg-white border-brown-300">
               <SelectValue placeholder="Category" />
             </SelectTrigger>
@@ -67,7 +80,7 @@ const ArticleSection = () => {
 
       {/* Article Grid - Dynamic Rendering */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
-        {blogPosts.map((article) => (
+        {filteredArticles.map((article) => (
           <BlogCard
             key={article.id}
             image={article.image}

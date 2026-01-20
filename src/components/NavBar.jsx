@@ -2,6 +2,12 @@
 import React, { useState } from 'react';
 import { Menu, X } from 'lucide-react'; // ไอคอน
 import { Button } from "@/components/ui/button"; // ใช้ปุ่มจาก shadcn
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -35,13 +41,26 @@ const NavBar = () => {
 
       {/* Mobile Dropdown (แสดงเมื่อกด Hamburger) */}
       {isOpen && (
-        <div className="md:hidden bg-white absolute w-full px-6 py-4 shadow-lg flex flex-col gap-4">
-          <Button variant="ghost" className="w-full justify-start text-lg">
-            Log in
-          </Button>
-          <Button className="w-full bg-black text-white hover:bg-gray-800 rounded-full text-lg">
-            Sign up
-          </Button>
+        <div className="md:hidden bg-white absolute w-full px-6 py-4 shadow-lg">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" className="w-full justify-start text-lg">
+                Menu
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-56">
+              <DropdownMenuItem>
+                <Button variant="ghost" className="w-full justify-start">
+                  Log in
+                </Button>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <Button className="w-full bg-black text-white hover:bg-gray-800">
+                  Sign up
+                </Button>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       )}
     </nav>

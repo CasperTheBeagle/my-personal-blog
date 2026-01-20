@@ -42,15 +42,10 @@ const HeroSection = () => {
             I am a pet enthusiast and freelance writer who specializes in animal behavior and care. With a deep love for cats, I enjoy sharing insights on feline companionship and wellness.
           </p>
           <p className="text-brown-400 leading-relaxed">
-            When i'm not writing, I spends time volunteering at my local animal shelter, helping cats find loving homes.
+            When I'm not writing, I spend time volunteering at my local animal shelter, helping cats find loving homes.
           </p>
         </div>
 
-      </div>
-
-      {/* Section Header ด้านล่างสุด (Latest articles) */}
-      <div className="mt-20">
-        <h2 className="text-2xl font-bold font-serif">Latest articles</h2>
       </div>
     </section>
   );
