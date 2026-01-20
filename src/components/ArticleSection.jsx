@@ -7,22 +7,90 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import BlogCard from './BlogCard';
-import { blogPosts } from '../data/blogPosts';
-
-const categories = ["Highlight", "Cat", "Inspiration", "General"];
+import { fetchBlogPosts, fetchCategories } from '../api/blogApi';
 
 const ArticleSection = () => {
   const [selectedCategory, setSelectedCategory] = useState('Highlight');
+  const [posts, setPosts] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isInitialLoading, setIsInitialLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const filteredArticles = selectedCategory === 'Highlight'
-    ? blogPosts
-    : blogPosts.filter(article => article.category === selectedCategory);
+  // ฟังก์ชันสำหรับโหลดข้อมูล
+  const fetchPosts = async (reset = false) => {
+    // ป้องกันการโหลดซ้ำถ้ายังโหลดไม่เสร็จ
+    if (isLoading) return;
+
+    setIsLoading(true);
+    try {
+      const currentPage = reset ? 1 : page;
+      const categoryParam = selectedCategory === 'Highlight' ? '' : selectedCategory;
+
+      console.log('ArticleSection: Fetching posts', { currentPage, categoryParam, reset });
+      const response = await fetchBlogPosts(currentPage, 6, categoryParam);
+      console.log('ArticleSection: Received response', response);
+
+      if (reset) {
+        // ถ้าเปลี่ยน category ให้เริ่มใหม่
+        setPosts(response.posts);
+        setPage(1);
+      } else {
+        // ถ้าโหลดเพิ่ม (View More)
+        setPosts((prevPosts) => [...prevPosts, ...response.posts]);
+      }
+
+      // ตรวจสอบว่าถึงหน้าสุดท้ายหรือยัง
+      setHasMore(response.currentPage < response.totalPages);
+      setError(null);
+    } catch (err) {
+      console.error('ArticleSection: Error fetching posts:', err);
+      setError('Failed to fetch data');
+    } finally {
+      setIsLoading(false);
+      setIsInitialLoading(false);
+    }
+  };
+
+  // โหลด categories เมื่อ component mount
+  useEffect(() => {
+    const loadCategories = async () => {
+      try {
+        const categoriesData = await fetchCategories();
+        setCategories(categoriesData);
+      } catch (err) {
+        console.error('Error fetching categories:', err);
+      }
+    };
+    loadCategories();
+  }, []);
+
+  // โหลดโพสต์ใหม่เมื่อ page หรือ category เปลี่ยน
+  useEffect(() => {
+    fetchPosts(true); // reset = true สำหรับการโหลดใหม่
+  }, [selectedCategory]);
+
+  // โหลดโพสต์เพิ่มเมื่อ page เปลี่ยน (สำหรับ View More)
+  useEffect(() => {
+    if (page > 1) {
+      fetchPosts(false); // reset = false สำหรับการโหลดเพิ่ม
+    }
+  }, [page]);
 
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
   };
+
+  const handleLoadMore = () => {
+    if (!isLoading && hasMore) {
+      setPage((prevPage) => prevPage + 1);
+    }
+  };
+
   return (
     <div className="max-w-[1440px] mx-auto px-6 md:px-16 mt-20 mb-20">
       <h2 className="text-2xl font-bold font-serif text-brown-600 mb-6">Latest articles</h2>
@@ -78,21 +146,52 @@ const ArticleSection = () => {
         </div>
       </div>
 
+      {/* Loading State */}
+      {isInitialLoading && (
+        <div className="flex justify-center items-center py-20">
+          <div className="text-brown-400 text-lg">Loading...</div>
+        </div>
+      )}
+
+      {/* Error State */}
+      {error && !isInitialLoading && (
+        <div className="flex justify-center items-center py-20">
+          <div className="text-red-500 text-lg">Error: {error}</div>
+        </div>
+      )}
+
       {/* Article Grid - Dynamic Rendering */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
-        {filteredArticles.map((article) => (
-          <BlogCard
-            key={article.id}
-            image={article.image}
-            category={article.category}
-            title={article.title}
-            description={article.description}
-            author={article.author}
-            date={article.date}
-            authorImage={article.authorImage}
-          />
-        ))}
-      </div>
+      {!isInitialLoading && !error && (
+        <>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
+            {posts.map((article) => (
+              <BlogCard
+                key={article.id}
+                image={article.image}
+                category={article.category}
+                title={article.title}
+                description={article.description}
+                author={article.author}
+                date={article.date}
+                authorImage={article.authorImage}
+              />
+            ))}
+          </div>
+
+          {/* View More Button */}
+          {hasMore && (
+            <div className="text-center mt-12">
+              <button
+                onClick={handleLoadMore}
+                className="font-medium px-8 py-3 rounded-md border-2 border-brown-400 text-brown-400 hover:bg-brown-400 hover:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                disabled={isLoading}
+              >
+                {isLoading ? 'Loading...' : 'View more'}
+              </button>
+            </div>
+          )}
+        </>
+      )}
     </div>
   );
 };
