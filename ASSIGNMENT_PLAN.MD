@@ -3,7 +3,7 @@
 ## โปรเจ็กภาพรวม
 สร้างเว็บไซต์บล็อกส่วนตัวด้วย React และ Vite ประกอบด้วย 9 assignments ที่ต้องทำตามลำดับ
 
-## สถานะปัจจุบัน: 5/9 เสร็จแล้ว
+## สถานะปัจจุบัน: 7/9 เสร็จแล้ว
 
 | Assignment | สถานะ | หัวข้อ | Priority |
 |-------------|--------|--------|----------|
@@ -12,8 +12,8 @@
 | [ASSIGNMENT_3.MD](./ASSIGNMENT_3.MD) | ✅ เสร็จแล้ว | React Modules Building | Low |
 | [ASSIGNMENT_4.MD](./ASSIGNMENT_4.MD) | ✅ เสร็จแล้ว | React Props | High |
 | [ASSIGNMENT_5.MD](./ASSIGNMENT_5.MD) | ✅ เสร็จแล้ว | React Rendering List Items | High |
-| [ASSIGNMENT_6.MD](./ASSIGNMENT_6.MD) | ❌ ยังไม่เสร็จ | React State | High |
-| [ASSIGNMENT_7.MD](./ASSIGNMENT_7.MD) | ❌ ยังไม่เสร็จ | React Data Fetching | High |
+| [ASSIGNMENT_6.MD](./ASSIGNMENT_6.MD) | ✅ เสร็จแล้ว | React State | High |
+| [ASSIGNMENT_7.MD](./ASSIGNMENT_7.MD) | ✅ เสร็จแล้ว | React Data Fetching | High |
 | [ASSIGNMENT_8.MD](./ASSIGNMENT_8.MD) | ❌ ยังไม่เสร็จ | React Router Part 1 | High |
 | [ASSIGNMENT_9.MD](./ASSIGNMENT_9.MD) | ❌ ยังไม่เสร็จ | React Router Part 2 | High |
 
