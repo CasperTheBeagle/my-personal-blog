@@ -2,7 +2,7 @@
 
 ## 📋 ข้อมูล Assignment
 - **ชื่อ**: React Router Building Personal Blog Assignment Part 1
-- **สถานะ**: ❌ ยังไม่เสร็จ
+- **สถานะ**: ✅ เสร็จแล้ว
 - **Priority**: High
 - **Prerequisite**: [ASSIGHMENT_7.MD](./ASSIGHMENT_7.MD)
 
