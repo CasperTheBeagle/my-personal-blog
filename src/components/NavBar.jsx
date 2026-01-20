@@ -1,23 +1,51 @@
-import React from 'react';
+// src/components/NavBar.jsx
+import React, { useState } from 'react';
+import { Menu, X } from 'lucide-react'; // ไอคอน
+import { Button } from "@/components/ui/button"; // ใช้ปุ่มจาก shadcn
 
 const NavBar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <nav className="main-container nav-bar">
-      <div className="nav-logo">hh.</div>
-      
-      {/* Mobile Menu Icon (Hamburger) */}
-      <div className="nav-burger">
-        <span></span>
-        <span></span>
+    <nav className="w-full border-b border-gray-100 bg-white sticky top-0 z-50">
+      <div className="max-w-[1440px] mx-auto px-6 md:px-16 h-20 flex items-center justify-between">
+
+        {/* Logo */}
+        <div className="text-2xl font-bold tracking-tight text-green-theme">
+          hh.
+        </div>
+
+        {/* Desktop Menu (ซ่อนบนมือถือ) */}
+        <div className="hidden md:flex items-center gap-4">
+          <Button variant="ghost" className="text-base rounded-full px-6">
+            Log in
+          </Button>
+          <Button className="bg-black text-white hover:bg-gray-800 rounded-full px-6 text-base">
+            Sign up
+          </Button>
+        </div>
+
+        {/* Mobile Menu Icon (แสดงเฉพาะมือถือ) */}
+        <div className="md:hidden">
+          <button onClick={() => setIsOpen(!isOpen)}>
+            {isOpen ? <X size={28} /> : <Menu size={28} />}
+          </button>
+        </div>
       </div>
 
-      {/* Desktop Buttons (Show only on PC via CSS) */}
-      <div className="nav-desktop-actions">
-        <button className="btn btn-outline">Log in</button>
-        <button className="btn btn-primary">Sign up</button>
-      </div>
+      {/* Mobile Dropdown (แสดงเมื่อกด Hamburger) */}
+      {isOpen && (
+        <div className="md:hidden bg-white absolute w-full px-6 py-4 shadow-lg flex flex-col gap-4">
+          <Button variant="ghost" className="w-full justify-start text-lg">
+            Log in
+          </Button>
+          <Button className="w-full bg-black text-white hover:bg-gray-800 rounded-full text-lg">
+            Sign up
+          </Button>
+        </div>
+      )}
     </nav>
   );
 };
 
-export default NavBar;
+export { NavBar };

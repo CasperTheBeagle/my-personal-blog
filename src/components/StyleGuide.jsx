@@ -68,6 +68,12 @@ const StyleGuide = () => {
 
                 </div>
             </div>
+            {/* ตัวอย่างหน้า login */}
+            <div className="login-container">
+                <input type="text" placeholder="Username" />
+                <input type="password" placeholder="Password" />
+                <button>Login</button>
+            </div>
         </section>
     );
 };

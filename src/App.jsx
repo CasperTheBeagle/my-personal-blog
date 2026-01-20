@@ -1,21 +1,20 @@
-import React from 'react';
-import './App.css';
-import NavBar from './components/NavBar';
-import HeroSection from './components/HeroSection';
-import StyleGuide from './components/StyleGuide';
+// src/App.jsx
+import { NavBar } from './components/NavBar';
+import { HeroSection } from './components/HeroSection';
+import { ArticleSection } from './components/ArticleSection';
+import { Footer } from './components/Footer';
 
 function App() {
   return (
-    <div>
+    <div className="min-h-screen bg-brown-100 text-brown-600 font-sans">
       <NavBar />
-      
-      <main>
-        <HeroSection />
-        
-        {/* Style Guide Section */}
-        <StyleGuide />
-      </main>
-      
+      <HeroSection />
+
+      {/* เพิ่ม Article Section */}
+      <ArticleSection />
+
+      {/* เพิ่ม Footer */}
+      <Footer />
     </div>
   );
 }
