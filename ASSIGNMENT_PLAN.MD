@@ -1,9 +1,9 @@
 # Personal Blog Assignment Plan
 
 ## โปรเจ็กภาพรวม
-สร้างเว็บไซต์บล็อกส่วนตัวด้วย React และ Vite ประกอบด้วย 9 assignments ที่ต้องทำตามลำดับ
+สร้างเว็บไซต์บล็อกส่วนตัวด้วย React และ Vite ประกอบด้วย 10 assignments ที่ต้องทำตามลำดับ
 
-## สถานะปัจจุบัน: 9/9 เสร็จแล้ว ✅
+## สถานะปัจจุบัน: 9/10 เสร็จแล้ว ✅
 
 | Assignment | สถานะ | หัวข้อ | Priority |
 |-------------|--------|--------|----------|
@@ -16,6 +16,7 @@
 | [ASSIGNMENT_7.MD](./ASSIGNMENT_7.MD) | ✅ เสร็จแล้ว | React Data Fetching | High |
 | [ASSIGNMENT_8.MD](./ASSIGNMENT_8.MD) | ✅ เสร็จแล้ว | React Router Part 1 | High |
 | [ASSIGNMENT_9.MD](./ASSIGNMENT_9.MD) | ✅ เสร็จแล้ว | Complete UI Extensions | High |
+| [ASSIGNMENT_10.MD](./ASSIGNMENT_10.MD) | ⏳ ใหม่ | API Server Development & Deployment | High |
 
 ## Dependencies (การพึ่งพาระหว่าง assignments)
 
